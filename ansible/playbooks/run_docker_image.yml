@@ -1,0 +1,14 @@
+- hosts: tag_Name_docker_host
+  remote_user: ec2-user
+  sudo: yeske
+
+  tasks:
+    - include_vars: vars/secrets.yml
+
+    - name: Run the docker image created by the jenkins job
+      docker_container:
+        name: petclinic
+        image: idan1281/petclinic
+        published_ports: 8888:8080
+        detach: true
+      register: docker_host
